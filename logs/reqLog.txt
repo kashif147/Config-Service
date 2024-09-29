@@ -56,3 +56,8 @@
 20240929GMT+1	17:21:09	2329c904-c37e-4af4-aba5-90f581c1a00e	POST	undefined	/auth
 20240929GMT+1	17:21:25	793d6d50-0fd1-44f8-ba09-d6d366ed55af	GET	undefined	/regiontype
 20240929GMT+1	17:21:45	6cd4d2a5-8659-4c18-b356-e66269c828a0	GET	undefined	/employees
+20240929GMT+1	18:20:21	2999e079-5db3-4e23-b50b-4a9b1a65b7b6	POST	undefined	/auth
+20240929GMT+1	18:21:26	66a0b0ae-87d9-4417-884a-c75feb2282aa	POST	undefined	/auth
+20240929GMT+1	18:22:09	5be72c4b-72c9-43fb-8191-dcf02079c096	POST	undefined	/auth
+20240929GMT+1	18:26:19	442b1434-8635-442a-9efc-ca2ae5ebfb65	POST	undefined	/auth
+20240929GMT+1	18:26:28	f00ab4f2-bfb0-47f3-ad5f-ea7f42154c39	GET	undefined	/regiontype
