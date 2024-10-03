@@ -61,3 +61,13 @@
 20240929GMT+1	18:22:09	5be72c4b-72c9-43fb-8191-dcf02079c096	POST	undefined	/auth
 20240929GMT+1	18:26:19	442b1434-8635-442a-9efc-ca2ae5ebfb65	POST	undefined	/auth
 20240929GMT+1	18:26:28	f00ab4f2-bfb0-47f3-ad5f-ea7f42154c39	GET	undefined	/regiontype
+20240929GMT+1	23:08:00	069bc5cf-db7b-45b8-be79-af8258cb34f3	GET	undefined	/
+20240929GMT+1	23:13:21	5a46afd8-edd6-4f5d-868a-e7669eccd367	POST	undefined	/auth
+20240929GMT+1	23:14:25	02e2c26b-7c86-4234-8f84-6030526c7c70	POST	undefined	/auth
+20240929GMT+1	23:14:49	ab692196-a7ee-4f35-b7ad-639a0d5cd0be	GET	undefined	/regiontype
+20240929GMT+1	23:15:01	2cd7f1a9-e452-4539-a777-aac266a4f4df	GET	undefined	/regiontype
+20240929GMT+1	23:15:29	74251488-32c9-4370-85af-c22a3e2e4a18	POST	undefined	/auth
+20241003GMT+1	18:07:40	c5749906-80b7-40ff-b829-43ee62f8c82c	POST	undefined	/auth
+20241003GMT+1	18:11:13	bda0e48e-eee7-4e52-94d2-ce786a152a8e	POST	undefined	/auth
+20241003GMT+1	18:13:17	03b369e3-5666-48cf-ac2a-c229f4783cfd	POST	undefined	/auth
+20241003GMT+1	18:24:49	33bd24ac-f003-4f9d-aea9-5b37e5310850	POST	undefined	/auth

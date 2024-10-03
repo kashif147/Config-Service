@@ -25,6 +25,9 @@
     "mongoose-uuid-ts": "^1.0.4",
     "uuid": "^10.0.0"
   },
+  "engines": {
+      "node": "20.x" 
+    },
   "devDependencies": {
     "nodemon": "^3.1.4"
   }
