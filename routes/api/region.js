@@ -15,7 +15,7 @@ router.route('/')
 //      .get(regionController.getRegion);
 
 
-     router.route('/:RegionTypeID&:ParentRegion')
+     router.route('/RegionTypeID/:RegionTypeID?/ParentRegion/:ParentRegion?')
      .get(regionController.getRegionWithType);
 
 

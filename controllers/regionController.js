@@ -73,23 +73,40 @@ const createNewRegion =  async (req, res) => {
     }
  */
     const getRegionWithType =  async (req, res) => {
-       // if (!req?.params?.RegionTypeID) return res.status(400).json({ 'message': 'Region Type required.'});
-    
-        if (!req?.params?.RegionTypeID && !req?.params?.ParentRegion ) {
-            return res.status(400).json({ 'message': 'Region Type and Parent Region are required' });
-            console.log("dd")
+        try {
+         // Extract parameters from req.params
+         const { RegionTypeID, ParentRegion } = req.params;
 
+         // Build the query object dynamically
+         let query = {};
+
+         // Add RegionTypeID to the query if provided
+        if (RegionTypeID) {
+            query.RegionTypeID = parseInt(RegionTypeID);
         }
 
-       // const region = await Region.find({ RegionTypeID: req.params.RegionTypeID}).exec();
-       const region = await Region.find({ RegionTypeID: req.params.RegionTypeID,
-                                      ParentRegion: req.params.ParentRegion}).exec();
-
-        if (!Region) {
-                    return res.status(240).json({ "message": ` No Region matches against Region Type ${req.params.RegionTypeID}. ` });
+        // Add ParentRegion to the query if provided
+        if (ParentRegion) {
+            query.ParentRegion = parseInt(ParentRegion);
         }
-        res.json(region);
-    }
+
+        console.log("test query" + query);
+//        return res.status(240).json({ "message": ` query:  query ` });
+        // Execute the query with the built query object
+        const regions = await Region.find(query).exec();
+
+        // If no regions are found, return a 404
+        if (regions.length === 0) {
+            return res.status(404).send('No regions found');
+        }
+
+        // Send back the matching regions
+        res.json(regions);
+
+        } catch (error) {
+            res.status(500).send('Server error');
+        }      
+    };
 
     
     module.exports = {

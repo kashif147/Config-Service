@@ -7,8 +7,11 @@ const regionSchema = new mongoose.Schema({
     RegionCode: { type: String, required: true },
     RegionName: { type: String, required: true },
     DisplayName: { type: String, required: true },
-    ParentRegion: { type: mongoose.Schema.Types.String, ref: 'Region', default: null },  // Self-referencing
-    RegionTypeID: { type: mongoose.Schema.Types.String, ref: 'RegionTypes', required: true }, // Reference to RegionType
+    ParentRegion: { type: Number, ref: 'Region', default: null },  // Now storing as Number, self-referencing
+    RegionTypeID: { type: Number, ref: 'RegionTypes', required: true },  // Now storing as Number, reference to RegionType
+
+  //  ParentRegion: { type: mongoose.Schema.Types.String, ref: 'Region', default: null },  // Self-referencing
+   // RegionTypeID: { type: mongoose.Schema.Types.String, ref: 'RegionTypes', required: true }, // Reference to RegionType
     isDeleted: { type: Boolean, default: false }
 });
 
