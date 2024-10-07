@@ -77,6 +77,8 @@ const createNewRegion =  async (req, res) => {
     
         if (!req?.params?.RegionTypeID && !req?.params?.ParentRegion ) {
             return res.status(400).json({ 'message': 'Region Type and Parent Region are required' });
+            console.log("dd")
+
         }
 
        // const region = await Region.find({ RegionTypeID: req.params.RegionTypeID}).exec();
