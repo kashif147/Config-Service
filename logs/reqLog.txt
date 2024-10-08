@@ -302,3 +302,16 @@
 20241007GMT+1	13:15:40	4c6f2855-884f-47ab-85c8-0d48bfed4922	GET	undefined	/region/RegionTypeID/ParentRegion/1
 20241007GMT+1	13:15:49	e3b2423f-e499-4024-9f26-bb8f60f8b7b9	GET	undefined	/region/RegionTypeID/1/ParentRegion/
 20241007GMT+1	13:15:58	f06e6bab-2442-45b5-8cf6-e2ea050d0f30	GET	undefined	/region/RegionTypeID/100/ParentRegion/
+20241008GMT+1	20:10:30	7b4487b2-89ce-4450-afe1-9f55b172f60e	GET	undefined	/logout
+20241008GMT+1	20:14:03	6b78c4d7-db7f-462f-8a2b-8f3278f90dd6	GET	undefined	/
+20241008GMT+1	20:14:03	98aeb50d-e57b-4de7-94ad-35b71f3ef237	GET	undefined	/css/style.css
+20241008GMT+1	20:14:03	bb30ee92-519b-4b65-9890-01470ae3c3c2	GET	undefined	/favicon.ico
+20241008GMT+1	20:14:10	cf72f857-38c6-46a8-b7e6-7536f3a23f54	GET	undefined	/api/
+20241008GMT+1	20:14:10	cc4bf84b-aac6-4b1f-a0b4-fd8aa2a51758	GET	undefined	/favicon.ico
+20241008GMT+1	20:19:46	e3330465-9b6c-46ad-b84f-05b1e1d19975	GET	undefined	/api/
+20241008GMT+1	20:19:46	d82247b8-87d7-40b3-9277-f7214cee168e	GET	undefined	/favicon.ico
+20241008GMT+1	20:19:54	4dea245d-c516-4505-9f48-d0054d24382e	GET	undefined	/api-docw
+20241008GMT+1	20:19:54	da5fb654-692e-486b-8ac7-1583e9832acd	GET	undefined	/favicon.ico
+20241008GMT+1	20:19:57	d876d1fd-4e56-48b1-a5b3-84f3d20d76cc	GET	undefined	/api-doc
+20241008GMT+1	20:19:57	28eacc19-276c-4218-bed9-5a7c394d3dd9	GET	undefined	/favicon.ico
+20241008GMT+1	20:23:28	4668478b-29e7-4b98-aeb5-9f0378bf8c7d	GET	undefined	/auth
