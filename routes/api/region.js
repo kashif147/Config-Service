@@ -4,15 +4,7 @@ const regionController = require('../../controllers/regionController.js');
 const ROLES_LIST = require('../../config/roles_list.js');
 const verifyRoles = require('../../middleware/verifyRoles.js');
 
-/**
- * @swagger
- * /api/region:
- *   get:
- *     summary: Retrieve a list of examples
- *     responses:
- *       200:
- *         description: A list of examples
- */
+
 router.route('/')
     .get(regionController.getAllRegions)
     .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),regionController.createNewRegion)

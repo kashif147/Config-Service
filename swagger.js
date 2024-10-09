@@ -13,11 +13,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3500', // Your server URL
+        url: 'https://node-api-app-dxecgpajapacc4gs.northeurope-01.azurewebsites.net', // Your server URL
       },
     ],
   },
-  apis: ['./routes/*.js'], // Path to the API docs
+  apis: ['./routes/*.js','./routes/api/*.js'], // Path to the API docs
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

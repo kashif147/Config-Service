@@ -6,10 +6,10 @@ const logoutController = require('../controllers/logoutController');
  * @swagger
  * /logout:
  *   get:
- *     summary: Retrieve a list of examples
+ *     summary: Logout
  *     responses:
  *       200:
- *         description: A list of examples
+ *         description: A Sign out of the application
  */
 router.get('/', logoutController.handleLogout);
 

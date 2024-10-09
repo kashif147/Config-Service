@@ -4,12 +4,12 @@ const refreshTokenController = require('../controllers/refreshTokenController');
 
 /**
  * @swagger
- * /register:
+ * /refresh:
  *   get:
- *     summary: Retrieve a list of examples
+ *     summary: Refresh token
  *     responses:
  *       200:
- *         description: A list of examples
+ *         description: Get the refresh token
  */
 router.get('/', refreshTokenController.handleRefreshToken);
 

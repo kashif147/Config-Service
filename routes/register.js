@@ -5,11 +5,11 @@ const registerController = require('../controllers/registerController.js');
 /**
  * @swagger
  * /register:
- *   get:
- *     summary: Retrieve a list of examples
+ *   post:
+ *     summary: create a new user
  *     responses:
  *       200:
- *         description: A list of examples
+ *         description: create a new user. username, password are requried
  */
 router.post('/', registerController.handleNewUser);
 
