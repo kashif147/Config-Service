@@ -19,14 +19,13 @@ const getAllRegionTypes = async (req, res) =>
     }
 
 const createNewRegionType =  async (req, res) => {
-        if (!req?.body?.RegionTypeID || !req?.body?.RegionType || !req?.body?.DisplayName ) {
-            return res.status(400).json({ 'message': 'RegionTypeID, Region Type and Display names are required' });
+        if ( !req?.body?.RegionType || !req?.body?.DisplayName ) {
+            return res.status(400).json({ 'message': 'Region Type/Display name is required' });
         }
         
         try 
         {
             const result = await RegionType.create({
-                RegionTypeID: req.body.RegionTypeID,
                 RegionType: req.body.RegionType,
                 DisplayName: req.body.DisplayName,
                 isDeleted: req.body.isDeleted
@@ -48,11 +47,11 @@ const createNewRegionType =  async (req, res) => {
             return res.status(240).json({ "message": ` No RegionType matches ID ${req.body.id}. ` });
         }
     
-        if (req.body?.RegionTypeID) regiontype.RegionTypeID = req.body.RegionTypeID;
         if (req.body?.RegionType) regiontype.RegionType = req.body.RegionType;
         if (req.body?.DisplayName) regiontype.DisplayName = req.body.DisplayName;
-        if (req.body?.isDeleted) regiontype.isDeleted = req.body.isDeleted;
-        
+        if (req.body.isDeleted) regiontype.isDeleted = req.body.isDeleted;
+        if (req.body.isActive) regiontype.isActive = req.body.isActive;
+
         const result = await regiontype.save();
         res.json(result);
     }

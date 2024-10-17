@@ -8,14 +8,13 @@ const getAllContactType = async (req, res) =>
     }
 
 const createNewContactType =  async (req, res) => {
-        if (!req?.body?.ContactTypeID || !req?.body?.ContactType || !req?.body?.DisplayName ) {
-            return res.status(400).json({ 'message': 'ContactTypeID, Contact Type and Display names are required' });
+        if (!req?.body?.ContactType ) {
+            return res.status(400).json({ 'message': 'Contact Type  isrequired' });
         }
         
         try 
         {
             const result = await ContactType.create({
-                ContactTypeID: req.body.ContactTypeID,
                 ContactType: req.body.ContactType,
                 DisplayName: req.body.DisplayName,
                 isDeleted: req.body.isDeleted
@@ -37,10 +36,11 @@ const createNewContactType =  async (req, res) => {
             return res.status(240).json({ "message": ` No ContactType matches ID ${req.body.id}. ` });
         }
     
-        if (req.body?.ContactTypeID) contacttype.ContactTypeID = req.body.ContactTypeID;
         if (req.body?.ContactType) contacttype.ContactType = req.body.ContactType;
         if (req.body?.DisplayName) contacttype.DisplayName = req.body.DisplayName;
         if (req.body?.isDeleted) contacttype.isDeleted = req.body.isDeleted;
+        if (req.body?.isActive) contacttype.isActive = req.body.isActive;
+
         
         const result = await contacttype.save();
         res.json(result);

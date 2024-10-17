@@ -8,20 +8,19 @@ const getAllRegions = async (req, res) =>
     }
 
 const createNewRegion =  async (req, res) => {
-        if (!req?.body?.RegionID || !req?.body?.RegionCode ) {
-            return res.status(400).json({ 'message': 'RegionID, Region Code are required' });
+        if (!req?.body?.RegionCode || !req?.body?.RegionName ) {
+            return res.status(400).json({ 'message': 'Region Code/Name are required' });
         }
         
         try 
         {
-            const result = await Region.create({
-                RegionID: req.body.RegionID,
+            const result = await  Region.create({
                 RegionCode: req.body.RegionCode,
                 RegionName: req.body.RegionName,
                 DisplayName: req.body.DisplayName,
                 ParentRegion: req.body.ParentRegion,
                 RegionTypeID: req.body.RegionTypeID,
-                isDeleted: req.body.isDeleted
+                isDeleted: req.body.isDeleted                
 
             });
             res.status(201).json(result);
@@ -31,38 +30,41 @@ const createNewRegion =  async (req, res) => {
         }
     }
     
-    /* const updateContactType = async (req, res) => {
+const updateRegion = async (req, res) => {
         if (!req?.body?.id) {
             return res.status(400).json({ 'message': 'ID parameter is required'});
         }
     
-        const contacttype = await ContactType.findOne({ _id: req.body.id}).exec();
-        if (!contacttype) {
-            return res.status(240).json({ "message": ` No ContactType matches ID ${req.body.id}. ` });
+        const region = await Region.findOne({ _id: req.body.id}).exec();
+        if (!region) {
+            return res.status(240).json({ "message": ` No Region matches ID ${req.body.id}. ` });
         }
     
-        if (req.body?.ContactTypeID) contacttype.ContactTypeID = req.body.ContactTypeID;
-        if (req.body?.ContactType) contacttype.ContactType = req.body.ContactType;
-        if (req.body?.DisplayName) contacttype.DisplayName = req.body.DisplayName;
-        if (req.body?.isDeleted) contacttype.isDeleted = req.body.isDeleted;
-        
-        const result = await contacttype.save();
+        if (req.body?.RegionCode) region.RegionCode = req.body.RegionCode;
+        if (req.body?.RegionName) region.RegionName = req.body.RegionName;
+        if (req.body?.DisplayName) region.DisplayName = req.body.DisplayName;
+        if (req.body?.ParentRegion) region.ParentRegion = req.body.ParentRegion;
+        if (req.body?.RegionTypeID) region.RegionTypeID = req.body.RegionTypeID;
+        if (req.body?.isDeleted) region.isDeleted = req.body.isDeleted;
+        if (req.body?.isActive) region.isActive = req.body.isActive;
+
+        const result = await region.save();
         res.json(result);
     }
     
-    const deleteContactType= async (req, res) => {
-        if (!req?.body?.id) return res.status(400).json({ 'message': 'ContactType ID required.'});
+    const deleteRegion= async (req, res) => {
+        if (!req?.body?.id) return res.status(400).json({ 'message': 'Region ID required.'});
     
-        const contacttype = await ContactType.findOne({ _id: req.body.id}).exec();
-        if (!contacttype) {
-            return res.status(240).json({ "message": ` No contacttype matches ID ${req.body.id}. ` });
+        const region = await Region.findOne({ _id: req.body.id}).exec();
+        if (!region) {
+            return res.status(240).json({ "message": ` No region matches ID ${req.body.id}. ` });
         }
     
-       const result = await contacttype.deleteOne({ _id: req.body.id });
+       const result = await region.deleteOne({ _id: req.body.id });
         res.json(result);
-    } */
+    } 
     
-/*     const getRegion =  async (req, res) => {
+    const getRegion =  async (req, res) => {
         if (!req?.params?.id) return res.status(400).json({ 'message': 'RegionID required.'});
     
         const region = await Region.findOne({ _id: req.params.id}).exec();
@@ -71,7 +73,8 @@ const createNewRegion =  async (req, res) => {
         }
         res.json(region);
     }
- */
+ 
+    //load region against regiontype or parentregion parameters
     const getRegionWithType =  async (req, res) => {
         try {
          // Extract parameters from req.params
@@ -82,12 +85,12 @@ const createNewRegion =  async (req, res) => {
 
          // Add RegionTypeID to the query if provided
         if (RegionTypeID) {
-            query.RegionTypeID = parseInt(RegionTypeID);
+            query.RegionTypeID = RegionTypeID;
         }
 
         // Add ParentRegion to the query if provided
         if (ParentRegion) {
-            query.ParentRegion = parseInt(ParentRegion);
+            query.ParentRegion = ParentRegion;
         }
 
         console.log("test query" + query);
@@ -112,8 +115,8 @@ const createNewRegion =  async (req, res) => {
     module.exports = {
         getAllRegions,
         createNewRegion,
-       // updateRegion,
-        //deleteRegion,
-       // getRegion,
+        updateRegion,
+        deleteRegion,
+        getRegion,
         getRegionWithType
        }
