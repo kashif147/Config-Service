@@ -1,4 +1,7 @@
+const Contact = require('../model/Contact');
 const Region = require('../model/Region');
+const RegionalContacts = require('../model/RegionalContacts');
+const mongoose = require('mongoose');
 
 const getAllRegions = async (req, res) => 
     {
@@ -8,25 +11,48 @@ const getAllRegions = async (req, res) =>
     }
 
 const createNewRegion =  async (req, res) => {
-        if (!req?.body?.RegionCode || !req?.body?.RegionName ) {
-            return res.status(400).json({ 'message': 'Region Code/Name are required' });
-        }
-        
+      //  if (!req?.body?.RegionCode || !req?.body?.RegionName ) {
+        //    return res.status(400).json({ 'message': 'Region Code/Name are required' });
+       // }
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
         try 
         {
-            const result = await  Region.create({
-                RegionCode: req.body.RegionCode,
-                RegionName: req.body.RegionName,
-                DisplayName: req.body.DisplayName,
-                ParentRegion: req.body.ParentRegion,
-                RegionTypeID: req.body.RegionTypeID,
-                isDeleted: req.body.isDeleted                
+            // Step 1: Create Profile
+            const region = await Region.create([req.body.region], { session });
+            const regionid = region[0]._id;
 
-            });
-            res.status(201).json(result);
+            const cprofile = req.body.contactsprofile;
+            if (cprofile && cprofile.length === 0) {
+               return res.status(400).json({ 'message': 'No Contacts registered' });
+            }
+    
+            // Step 2: Create Related Entities
+                const contactsprofile = req.body.contactsprofile.map(Contact => ({ ...Contact}));
+
+                const contacts = await Contact.create(contactsprofile, { session });
+                const contactid = contacts[0]._id;
+    
+                const result = await RegionalContacts.create({
+                 ContactID: contactid,
+                 RegionID: regionid
+                });
+                res.status(201).json(result);    
+                       
+            // Step 3: Commit transaction if all went well
+            await session.commitTransaction();
+            session.endSession();        
+            
+            res.status(201).send({ regionid , contactid});
+
         }
          catch (err) {
-            console.error(err);
+            // Rollback transaction
+             await session.abortTransaction();
+            session.endSession();
+             res.status(500).send({ error: 'Region registration failed', details: error });
+            //console.error(err);
         }
     }
     
@@ -109,6 +135,40 @@ const updateRegion = async (req, res) => {
         } catch (error) {
             res.status(500).send('Server error');
         }      
+    }
+
+    //regionProfile
+
+    const createRegionProfile =  async (req, res) => {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+    
+        try {
+    
+            // Step 1: Create Profile
+            const region = await Region.create([req.body.region], { session });
+        
+            const profileId = region[0]._id;
+            console.log(profileId);
+    
+            // Step 2: Create Related Entities
+           // const contacts = req.body.contacts.map(contact => ({ ...contact, profileId }));
+           // const regionalcontacts = req.body.regionalcontacts.map(rgcontact => ({ ...rgcontact, profileId }));
+        
+            //await contacts.create(contacts, { session });
+            //await regionalcontacts.create(regionalcontacts, { session });
+        
+            // Step 3: Commit transaction if all went well
+            await session.commitTransaction();
+            session.endSession();
+        
+            res.status(201).send({ profileId });
+          } catch (error) {
+            // Rollback transaction
+            await session.abortTransaction();
+            session.endSession();
+            res.status(500).send({ error: 'Profile registration failed', details: error });
+          }
     };
 
     

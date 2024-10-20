@@ -19,5 +19,5 @@ router.route('/')
   router.route('/RegionTypeID/:RegionTypeID?/ParentRegion/:ParentRegion?')
      .get(regionController.getRegionWithType);
 
-
+  
 module.exports = router;

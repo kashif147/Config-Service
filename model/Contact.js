@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Contacts Schema (Referenced to contactType)
-const regionalcontactsSchema = new mongoose.Schema({
+const contactSchema = new mongoose.Schema({
     ContactName: { type: String, required: true },
     ContactPhone: { type: String, required: true },
     ContactEmail: { type: String, required: true },
@@ -18,5 +18,5 @@ const regionalcontactsSchema = new mongoose.Schema({
    
 });
 
-module.exports = mongoose.model('Contact', contactsSchema);
+module.exports = mongoose.model('Contact', contactSchema);
 

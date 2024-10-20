@@ -1,3 +1,17 @@
 20241017GMT+1	21:28:35	9cc2a2e6-a75c-44c5-8505-37428d24c102	SyntaxError: Expected ',' or '}' after property value in JSON at position 101 (line 3 column 19)
 20241017GMT+1	22:04:19	3fd7a03d-55f8-4c3c-946d-7615acacc714	SyntaxError: Exponent part is missing a number in JSON at position 102 (line 3 column 25)
 20241017GMT+1	22:16:32	2c13aa9c-916c-47d8-85c4-0aa0c1033dbd	SyntaxError: Expected ',' or '}' after property value in JSON at position 126 (line 4 column 2)
+20241019GMT+1	20:28:47	b4af297c-b192-4140-9b92-1d688d567a75	SyntaxError: Unexpected token '"', ""profile":"... is not valid JSON
+20241019GMT+1	20:30:10	5d8d3b48-bd93-4134-966f-a169aca2a01c	SyntaxError: Unexpected token '"', ""region": "... is not valid JSON
+20241019GMT+1	20:30:21	6174f865-66de-4fd7-a75f-1c37fab5edd6	SyntaxError: Unexpected token '"', ""region": "... is not valid JSON
+20241019GMT+1	20:30:22	da918f68-ec86-4275-a5f8-795ce42ded24	SyntaxError: Unexpected token '"', ""region": "... is not valid JSON
+20241019GMT+1	20:30:22	aaefe6e6-17a5-4afe-a2e4-eaf61dff467d	SyntaxError: Unexpected token '"', ""region": "... is not valid JSON
+20241019GMT+1	20:30:23	bf3117d2-aeba-4d95-8e66-43b5b277c4b8	SyntaxError: Unexpected token '"', ""region": "... is not valid JSON
+20241020GMT+1	20:34:38	051a4ac3-0151-4431-8944-94e596c2e97b	SyntaxError: Unexpected token '}', ..."acts": [
+}
+}
+" is not valid JSON
+20241020GMT+1	20:35:19	9133d436-1864-4102-b0e1-886bd1b8bfd1	SyntaxError: Unexpected token '}', ..."acts": [
+}
+}
+" is not valid JSON

@@ -1,42 +1,34 @@
-const Region = require('../model/registerRegionController');
 
-console.log('test');
+app.post('/api/regionalprofile', async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
-const createRegionProfile =  async (req, res) => {
-    const session = await mongoose.startSession();
-    session.startTransaction();
+  try {
+    // Step 1: Create Profile
+    const profile = await Profile.create([req.body.profile], { session });
 
-    try {
+    const profileId = profile[0]._id;
 
-        console.log('dddd');
-        // Step 1: Create Profile
-        const region = await Region.create([req.body.region], { session });
-    
-        const profileId = region[0]._id;
-    
-        // Step 2: Create Related Entities
-       // const contacts = req.body.contacts.map(contact => ({ ...contact, profileId }));
-       // const regionalcontacts = req.body.regionalcontacts.map(rgcontact => ({ ...rgcontact, profileId }));
-    
-        //await contacts.create(contacts, { session });
-        //await regionalcontacts.create(regionalcontacts, { session });
-    
-        // Step 3: Commit transaction if all went well
-        await session.commitTransaction();
-        session.endSession();
-    
-        res.status(201).send({ profileId });
-      } catch (error) {
-        // Rollback transaction
-        await session.abortTransaction();
-        session.endSession();
-        res.status(500).send({ error: 'Profile registration failed', details: error });
-      }
-}
+    // Step 2: Create Related Entities
+   // const partnerships = req.body.partnerships.map(partner => ({ ...partner, profileId }));
+   // const children = req.body.children.map(child => ({ ...child, profileId }));
+   // const memberships = req.body.memberships.map(membership => ({ ...membership, profileId }));
+   // const subscriptions = req.body.subscriptions.map(subscription => ({ ...subscription, profileId }));
 
-// First Create Region, then Add in Contacts then in regionalcontacts
-// Documents --> ContactType, RegionType, Region, Contacts, RegionalContacts
-//app.post('/api/registerProfile', async (req, res) => {
-     
-  //});
-  
+    //await Partnership.create(partnerships, { session });
+    //await Children.create(children, { session });
+    //await Membership.create(memberships, { session });
+    //await Subscription.create(subscriptions, { session });
+
+    // Step 3: Commit transaction if all went well
+    await session.commitTransaction();
+    session.endSession();
+
+    res.status(201).send({ profileId });
+  } catch (error) {
+    // Rollback transaction
+    await session.abortTransaction();
+    session.endSession();
+    res.status(500).send({ error: 'Profile registration failed', details: error });
+  }
+});
