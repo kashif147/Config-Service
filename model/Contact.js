@@ -8,7 +8,7 @@ const contactSchema = new mongoose.Schema({
     ContactAddress: {
         BuildingOrHouse: { type: String, required: true },
         StreetOrRoad: { type: String, required: true },
-        AreaOrTown: { type: String, required: true },
+        AreaOrTown: { type: String, required: false },
         CityCountyOrPostCode: { type: String, required: true },
         Eircode: { type: String, required: true }
     },

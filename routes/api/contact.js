@@ -16,5 +16,4 @@ router.route('/')
       .get(contactController.getContact);
 
 
-
 module.exports = router;
