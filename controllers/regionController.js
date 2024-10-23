@@ -11,9 +11,9 @@ const getAllRegions = async (req, res) =>
     }
 
 const createNewRegion =  async (req, res) => {
-      //  if (!req?.body?.RegionCode || !req?.body?.RegionName ) {
-        //    return res.status(400).json({ 'message': 'Region Code/Name are required' });
-       // }
+        if (!req?.body?.region.RegionCode || !req?.body?.region.RegionName ) {
+            return res.status(400).json({ 'message': 'Region Code/Name are required' });
+        }
         const session = await mongoose.startSession();
         session.startTransaction();
 
@@ -24,27 +24,28 @@ const createNewRegion =  async (req, res) => {
             const regionid = region[0]._id;
 
             const cprofile = req.body.contactsprofile;
-            if (cprofile && cprofile.length === 0) {
-               return res.status(400).json({ 'message': 'No Contacts registered' });
-            }
-    
-            // Step 2: Create Related Entities
-                const contactsprofile = req.body.contactsprofile.map(Contact => ({ ...Contact}));
+            // Step 2: Optional Contact Profile Creation
+            let contactid = null; // Initialize contactid as null in case no contacts are provided
 
+            if (cprofile && cprofile.length > 0) {
+                // Proceed with contact creation if contacts profile exists
+                const contactsprofile = cprofile.map(contact => ({ ...contact }));
                 const contacts = await Contact.create(contactsprofile, { session });
-                const contactid = contacts[0]._id;
-    
-                const result = await RegionalContacts.create({
-                 ContactID: contactid,
-                 RegionID: regionid
-                });
-                res.status(201).json(result);    
+                contactid = contacts[0]._id;
+
+                // Create RegionalContacts only if contacts are provided
+                await RegionalContacts.create({
+                    ContactID: contactid,
+                    RegionID: regionid
+                }, { session });
+            }
                        
             // Step 3: Commit transaction if all went well
             await session.commitTransaction();
             session.endSession();        
             
-            res.status(201).send({ regionid , contactid});
+            // Send response, including contactid only if it exists
+            res.status(201).json({ regionid, contactid });        
 
         }
          catch (err) {
