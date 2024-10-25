@@ -19,11 +19,13 @@ const createNewRegion =  async (req, res) => {
 
         try 
         {
+            // const {} = req.body.region
             // Step 1: Create Profile
             const region = await Region.create([req.body.region], { session });
             const regionid = region[0]._id;
 
             const cprofile = req.body.contactsprofile;
+
             // Step 2: Optional Contact Profile Creation
             let contactid = null; // Initialize contactid as null in case no contacts are provided
 
@@ -39,7 +41,7 @@ const createNewRegion =  async (req, res) => {
                     RegionID: regionid
                 }, { session });
             }
-                       
+                    
             // Step 3: Commit transaction if all went well
             await session.commitTransaction();
             session.endSession();        
@@ -138,40 +140,7 @@ const updateRegion = async (req, res) => {
         }      
     }
 
-    //regionProfile
-
-    const createRegionProfile =  async (req, res) => {
-        const session = await mongoose.startSession();
-        session.startTransaction();
     
-        try {
-    
-            // Step 1: Create Profile
-            const region = await Region.create([req.body.region], { session });
-        
-            const profileId = region[0]._id;
-            console.log(profileId);
-    
-            // Step 2: Create Related Entities
-           // const contacts = req.body.contacts.map(contact => ({ ...contact, profileId }));
-           // const regionalcontacts = req.body.regionalcontacts.map(rgcontact => ({ ...rgcontact, profileId }));
-        
-            //await contacts.create(contacts, { session });
-            //await regionalcontacts.create(regionalcontacts, { session });
-        
-            // Step 3: Commit transaction if all went well
-            await session.commitTransaction();
-            session.endSession();
-        
-            res.status(201).send({ profileId });
-          } catch (error) {
-            // Rollback transaction
-            await session.abortTransaction();
-            session.endSession();
-            res.status(500).send({ error: 'Profile registration failed', details: error });
-          }
-    };
-
     
     module.exports = {
         getAllRegions,
