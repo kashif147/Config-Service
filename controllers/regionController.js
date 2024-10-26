@@ -19,11 +19,13 @@ const createNewRegion =  async (req, res) => {
 
         try 
         {
+            // const {} = req.body.region
             // Step 1: Create Profile
             const region = await Region.create([req.body.region], { session });
             const regionid = region[0]._id;
 
             const cprofile = req.body.contactsprofile;
+
             // Step 2: Optional Contact Profile Creation
             let contactid = null; // Initialize contactid as null in case no contacts are provided
 
@@ -39,7 +41,7 @@ const createNewRegion =  async (req, res) => {
                     RegionID: regionid
                 }, { session });
             }
-                       
+                    
             // Step 3: Commit transaction if all went well
             await session.commitTransaction();
             session.endSession();        
@@ -138,6 +140,8 @@ const updateRegion = async (req, res) => {
         }      
     }
 
+    
+    
     module.exports = {
         getAllRegions,
         createNewRegion,
