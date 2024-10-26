@@ -52,8 +52,8 @@ const createNewRegion =  async (req, res) => {
             // Rollback transaction
              await session.abortTransaction();
             session.endSession();
-             res.status(500).send({ error: 'Region registration failed', details: error });
-            //console.error(err);
+             res.status(500).send({ error: 'Region registration failed', details: err });
+            console.error(err);
         }
     }
     
