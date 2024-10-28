@@ -18,7 +18,7 @@ const createNewContact =  async (req, res) => {
             return res.status(400).json({ message: 'ContactName, ContactPhone, and ContactEmail are required' });
         }
 
-        console.log("Request body:", req.body); // Add this line to log the request body for debugging
+       // console.log("Request body:", req.body); // Add this line to log the request body for debugging
 
         
         try 
@@ -41,9 +41,11 @@ const createNewContact =  async (req, res) => {
             });
             res.status(201).json(result);
         }
-         catch (err) {
-            console.error(err);
-        }
+        catch (err) {
+        res.status(500).json({
+            message: 'An error occurred while creating the contact',
+            error: err.message
+        });
     };
     
     const updateContact = async (req, res) => {
@@ -51,7 +53,7 @@ const createNewContact =  async (req, res) => {
         const { ContactName, ContactPhone, ContactEmail, ContactAddress, ContactTypeID, isDeleted } = req.body;
     
         // Logging the request body for debugging
-        console.log("Request body:", req.body);
+       // console.log("Request body:", req.body);
     
         try {
             // Find the contact by ID

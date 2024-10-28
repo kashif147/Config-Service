@@ -14,12 +14,9 @@ const createNewRegion =  async (req, res) => {
         if (!req?.body?.region.RegionCode || !req?.body?.region.RegionName ) {
             return res.status(400).json({ 'message': 'Region Code/Name are required' });
         }
-        // const session = await mongoose.startSession();
-        // session.startTransaction();
 
         try 
         {
-            // const {} = req.body.region
             // Step 1: Create Profile
             const region = await Region.create([req.body.region]);
             // const region = await Region.create([req.body.region], { session });
@@ -45,18 +42,12 @@ const createNewRegion =  async (req, res) => {
             // }, { session });
             }
                     
-            // Step 3: Commit transaction if all went well
-            // await session.commitTransaction();
-            // session.endSession();        
             
             // Send response, including contactid only if it exists
             res.status(201).json({ regionid, contactid });        
 
         }
          catch (err) {
-            // Rollback transaction
-            //  await session.abortTransaction();
-            // session.endSession();
              res.status(500).send({ error: 'Region registration failed', details: err });
             console.error(err);
         }

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const regionSchema = new mongoose.Schema({
     RegionCode: { type: String, required: true },
     RegionName: { type: String, required: true },
-    DisplayName: { type: String, required: true },
+    DisplayName: { type: String },
     ParentRegion: { type: mongoose.Schema.Types.ObjectId, ref: 'Region', default: null },  // Now storing as Number, self-referencing
     RegionTypeID: { type: mongoose.Schema.Types.ObjectId, ref: 'RegionType', required: true },  // Now storing as Number, reference to RegionType
     isDeleted: { type: Boolean, default: false },
