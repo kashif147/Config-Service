@@ -686,3 +686,5 @@
 20241022GMT+1	16:41:07	44275e14-8ba2-430b-88fe-b572218c0b83	PUT	undefined	/contact
 20241025GMT+1	20:12:29	c319eb14-daaa-4055-927d-c6bf3ec4ed0b	POST	undefined	/auth
 20241025GMT+1	20:12:51	824c9da2-1e18-4dfa-a30e-bbf56760e097	POST	undefined	/region
+20241030GMT+0	10:44:12	dac6b53f-5844-4a3c-b5ca-b2187c496447	POST	undefined	/auth
+20241030GMT+0	10:44:22	7faebb4b-5975-4f0f-b6d6-72a38c378127	POST	undefined	/auth

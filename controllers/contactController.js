@@ -46,7 +46,8 @@ const createNewContact =  async (req, res) => {
             message: 'An error occurred while creating the contact',
             error: err.message
         });
-    };
+    }
+};
     
     const updateContact = async (req, res) => {
         const { id } = req.body;  // Get the contact ID from the request body
@@ -128,4 +129,4 @@ const createNewContact =  async (req, res) => {
         updateContact,
         deleteContact,
         getContact
-       }
+       };
