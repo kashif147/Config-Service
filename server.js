@@ -58,6 +58,8 @@ app.use('/regiontype', require('./routes/api/regiontype'));
 app.use('/contactType', require('./routes/api/contactType'));
 app.use('/region', require('./routes/api/region'));
 app.use('/contact', require('./routes/api/contact'));
+app.use('/lookuptype', require('./routes/api/lookuptype'));
+app.use('/lookup', require('./routes/api/lookup'));
 
 
 //app.all is for routin and apply for all http methods at once
