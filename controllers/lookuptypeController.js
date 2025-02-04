@@ -102,9 +102,9 @@ const deleteLookupType = async (req, res) => {
 }
 
 module.exports = {
-    getAllLookupType,
-    getLookupType,
-    createNewLookupType,
-    updateLookupType,
-    deleteLookupType
+      getAllLookupType,
+      getLookupType,
+      createNewLookupType,
+      updateLookupType,
+      deleteLookupType
    }
