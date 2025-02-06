@@ -688,3 +688,5 @@
 20241025GMT+1	20:12:51	824c9da2-1e18-4dfa-a30e-bbf56760e097	POST	undefined	/region
 20241030GMT+0	10:44:12	dac6b53f-5844-4a3c-b5ca-b2187c496447	POST	undefined	/auth
 20241030GMT+0	10:44:22	7faebb4b-5975-4f0f-b6d6-72a38c378127	POST	undefined	/auth
+20250206GMT+5	13:14:04	f33eaa16-51f7-4bab-84c6-18bc476cedb3	POST	undefined	/partnerLifeClaims
+20250206GMT+5	13:17:04	6c115cc9-1e1a-4ab7-90a4-aed82be4cd93	POST	undefined	/partnerLifeClaims

@@ -61,6 +61,15 @@ app.use('/contact', require('./routes/api/contact'));
 app.use('/lookuptype', require('./routes/api/lookuptype'));
 app.use('/lookup', require('./routes/api/lookup'));
 
+app.use("/profile", require('./routes/api/ProfileRoutes'))
+app.use("/gardaLifeClaims", require('./routes/api/GardaLifeClaimRoutes'))
+app.use("/partnerLifeClaims", require('./routes/api/PartnerLifeClaimRoute'))
+app.use("/criticalIllness", require('./routes/api/CriticalIllnessClimRoutes'))
+app.use("/transferRequest", require('./routes/api/TransferRequestRoutes'))
+
+
+
+
 
 //app.all is for routin and apply for all http methods at once
 //app.use is for middleware and not support rjax
