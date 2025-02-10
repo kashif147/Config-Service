@@ -60,6 +60,7 @@ app.use('/region', require('./routes/api/region'));
 app.use('/contact', require('./routes/api/contact'));
 app.use('/lookuptype', require('./routes/api/lookuptype'));
 app.use('/lookup', require('./routes/api/lookup'));
+app.use('/partner', require('./routes/api/PartnerRoutes'));
 
 app.use("/profile", require('./routes/api/ProfileRoutes'))
 app.use("/gardaLifeClaims", require('./routes/api/GardaLifeClaimRoutes'))

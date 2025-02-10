@@ -690,3 +690,16 @@
 20241030GMT+0	10:44:22	7faebb4b-5975-4f0f-b6d6-72a38c378127	POST	undefined	/auth
 20250206GMT+5	13:14:04	f33eaa16-51f7-4bab-84c6-18bc476cedb3	POST	undefined	/partnerLifeClaims
 20250206GMT+5	13:17:04	6c115cc9-1e1a-4ab7-90a4-aed82be4cd93	POST	undefined	/partnerLifeClaims
+20250210GMT+5	22:29:15	3fe8c2df-e6ce-43ec-806e-37398fb99a9a	GET	undefined	/partner
+20250210GMT+5	22:38:45	fa56f28a-eb48-45d4-82a3-d2c9781547a4	GET	undefined	/partner
+20250210GMT+5	22:39:27	24b6db37-743e-4095-a7e4-955c40d205bf	GET	undefined	/profile
+20250210GMT+5	22:40:00	5cc8ec1d-f746-444d-90fb-177636893df8	GET	undefined	/partner
+20250210GMT+5	22:40:08	3339ce8e-7e13-40c4-af33-504ab15655d5	POST	undefined	/partner
+20250210GMT+5	22:40:27	60a00859-a144-4e6f-bdc9-c767c715f05d	POST	undefined	/partner
+20250210GMT+5	22:40:40	bc1a72e3-f544-4b93-94bb-bb165362c5ee	POST	undefined	/partner
+20250210GMT+5	22:47:07	01cf548a-e7a9-4220-b584-fa9997cb9073	POST	undefined	/partner
+20250210GMT+5	22:48:27	f5fb9e39-ed72-42f2-a780-7463ed2e7b0d	POST	undefined	/partner
+20250210GMT+5	22:50:57	b34b8354-ebd5-4935-8538-051fee87426a	POST	undefined	/partner
+20250210GMT+5	22:51:38	40314486-b216-45a4-9d40-0dc816293930	POST	undefined	/partner
+20250210GMT+5	22:51:49	92237c03-cb17-4640-934b-e1e2d7f5d780	POST	undefined	/partner
+20250210GMT+5	22:52:57	e57b4b44-43da-44fb-99c8-74e00e711155	POST	undefined	/partner

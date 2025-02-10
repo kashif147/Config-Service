@@ -16,3 +16,6 @@
 }
 " is not valid JSON
 20241021GMT+1	16:58:16	0cfb6fb2-6f4a-4a49-97b1-c921cb8cef09	SyntaxError: Expected double-quoted property name in JSON at position 183 (line 6 column 3)
+20250210GMT+5	22:50:57	f84387e5-b437-4928-a9a6-ba564dd5c5e1	SyntaxError: Unexpected token ''', ...""surname":'Jane',
+ "... is not valid JSON
+20250210GMT+5	22:51:38	f2063003-ba3f-430d-a457-7dbc839d71d0	SyntaxError: Expected double-quoted property name in JSON at position 236
