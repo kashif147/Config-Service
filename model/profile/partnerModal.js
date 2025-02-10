@@ -6,7 +6,7 @@ const partnerSchema = new mongoose.Schema(
     title: { type: String, required: true },
     forename: { type: String, required: true },
     surname: { type: String, required: true },
-    maidenName: { type: String },
+    maidenName: { type: String ,required: true },
     dateOfBirth: { type: Date, required: true },
     dateMarriage: { type: Date },
     deceased: { type: Boolean, required: true },
