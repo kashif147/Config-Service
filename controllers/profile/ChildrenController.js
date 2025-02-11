@@ -1,4 +1,5 @@
 const Children = require("../../model/profile/ChildrenModal");
+const Profile = require('../../model/CreateProfileModules')
 
 // ✅ Get all children
 const getAllChildren = async (req, res) => {
@@ -22,13 +23,29 @@ const getChildById = async (req, res) => {
 };
 
 // ✅ Get all children associated with a specific profile
+
 const getChildrenByProfile = async (req, res) => {
-  try {
-    const children = await Children.find({ profileId: req.params.profileId });
-    res.status(200).json(children);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching children for profile", error });
-  }
+    try {
+        const { profileId } = req.params;
+
+        // Check if Profile exists
+        const profileExists = await Profile.findById(profileId);
+        if (!profileExists) {
+            return res.status(404).json({ message: "Profile not found" });
+        }
+
+        // Find partners associated with the profile
+        const ChildrenQu = await Children.find({ profileId });
+        
+        if (!ChildrenQu.length) {
+            return res.status(404).json({ message: "No children found for this profile" });
+        }
+
+        res.status(200).json(ChildrenQu);
+    } catch (error) {
+        console.error("Error fetching partners:", error);
+        res.status(500).json({ message: "Server error fetching partners", error });
+    }
 };
 
 // ✅ Create a new child (Admin, Editor)
