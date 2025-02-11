@@ -20,4 +20,4 @@ const partnerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("partner", partnershipSchema);
+module.exports = mongoose.model("partner", partnerSchema);
