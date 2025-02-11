@@ -16,7 +16,7 @@ router.route("/:id")
     .delete(verifyRoles(ROLES_LIST.Admin), childrenController.deleteChild);  // Delete a child by ID
 
 // ✅ Get all children of a specific profile
-router.route("/:profileId")
+router.route("/profile/:profileId")
     .get(childrenController.getChildrenByProfile);  // Fetch children linked to a profile
 
 module.exports = router;
