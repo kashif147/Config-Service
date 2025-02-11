@@ -16,7 +16,7 @@ router.route("/:id")
     .delete(verifyRoles(ROLES_LIST.Admin), partnerController.deletePartner);  // Delete a partner by ID
 
 // ✅ Get all partners of a specific profile (avoids conflict with `/:id`)
-router.route("/:profileId")
+router.route("/profile/:profileId")
     .get(partnerController.getPartnersByProfile);
 
 module.exports = router;

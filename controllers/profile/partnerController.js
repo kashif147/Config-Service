@@ -1,5 +1,5 @@
 const Partner = require("../../model/profile/partnerModal");
-
+const Profile = require('../../model/CreateProfileModules')
 // ✅ Get all partners
 const getAllPartners = async (req, res) => {
     try {
@@ -26,12 +26,28 @@ const getPartnerById = async (req, res) => {
 // ✅ Get all partners of a specific profile
 const getPartnersByProfile = async (req, res) => {
     try {
-        const partners = await Partner.find({ profileId: req.params.profileId });
+        const { profileId } = req.params;
+
+        // Check if Profile exists
+        const profileExists = await Profile.findById(profileId);
+        if (!profileExists) {
+            return res.status(404).json({ message: "Profile not found" });
+        }
+
+        // Find partners associated with the profile
+        const partners = await Partner.find({ profileId });
+        
+        if (!partners.length) {
+            return res.status(404).json({ message: "No partners found for this profile" });
+        }
+
         res.status(200).json(partners);
     } catch (error) {
-        res.status(500).json({ message: "Server Error", error: error.message });
+        console.error("Error fetching partners:", error);
+        res.status(500).json({ message: "Server error fetching partners", error });
     }
 };
+
 
 // ✅ Create a new partner (Fixed parameter names)
 const createPartner = async (req, res) => {

@@ -750,3 +750,11 @@
 20250211GMT+5	14:45:31	e93e5e30-4ea8-4d8c-8b1f-4d38d11a1d21	GET	undefined	/children
 20250211GMT+5	14:46:30	98c9a002-9afb-4882-aa1d-e5fe9886ffae	POST	undefined	/children
 20250211GMT+5	15:21:44	f50d79bb-5e35-4b05-af78-4d96b4d9be67	GET	undefined	/partner
+20250211GMT+5	15:40:41	ac3e1a03-e5eb-46ed-89f7-5ee028544ae9	GET	undefined	/partner/67a1b268a203d65ec4a553e2
+20250211GMT+5	15:41:11	ead4ae3f-e118-46cc-a85d-315d5dbacb47	GET	undefined	/partner/67a1b268a203d65ec4a553e2
+20250211GMT+5	15:50:06	703d3698-bc09-402d-b62d-70aaddac5e12	GET	undefined	/partner/67a1b268a203d65ec4a553e2
+20250211GMT+5	16:00:54	97529fb7-d3a7-45f7-9895-0a1107f6c771	GET	undefined	/partner/67a1b268a203d65ec4a553e2
+20250211GMT+5	16:01:15	ec99dc8f-2750-4f00-a5f3-dea8d9bb94db	GET	undefined	/partner/67a1b268a203d65ec4a553e2
+20250211GMT+5	16:47:16	8c7936cb-681e-445f-bfca-1376451c913f	GET	undefined	/partner/profile/67a1b268a203d65ec4a553e2
+20250211GMT+5	16:47:34	6f264b46-52a1-4170-9405-010786b3f6cf	GET	undefined	/partner/profile/67a1b268a203d65ec4a553e21
+20250211GMT+5	16:47:44	17ca78a4-dcdf-47e8-9961-c2f336c8e4b7	GET	undefined	/partner/profile/67a1b268a203d65ec4a553e2
