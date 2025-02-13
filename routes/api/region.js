@@ -7,12 +7,12 @@ const verifyRoles = require('../../middleware/verifyRoles.js');
 router.route('/')
     .get(regionController.getAllRegions)
     .post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),regionController.createNewRegion)
-   // .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),regiontypeController.updateRegionType)
-    //.delete(verifyRoles(ROLES_LIST.Admin),regiontypeController.deleteRegionType);
+   .put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),regionController.updateRegion)
+    .delete(verifyRoles(ROLES_LIST.Admin),regionController.deleteRegion);
     
 
-//  router.route('/:id')
-//      .get(regionController.getRegion);
+ router.route('/:id')
+     .get(regionController.getRegion);
 
 
      router.route('/RegionTypeID/:RegionTypeID?/ParentRegion/:ParentRegion?')
