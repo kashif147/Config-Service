@@ -15,10 +15,21 @@ const userSchema = new Schema({
         Admin: Number
     },
     password: {
-        type: String,
-        required: true
+        type: String
+    },
+    isMicrosoft: {
+        type: Boolean,
+        default: false
     },
     refreshToken: String
+});
+
+//  Pre-save hook to enforce password validation only when isMicrosoft is false
+userSchema.pre('save', function (next) {
+    if (!this.isMicrosoft && (!this.password || this.password.length === 0)) {
+        return next(new Error('Password is required unless logged in via Microsoft'));
+    }
+    next();
 });
 
 module.exports = mongoose.model('User', userSchema);

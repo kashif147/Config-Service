@@ -19,3 +19,15 @@
 20250210GMT+5	22:50:57	f84387e5-b437-4928-a9a6-ba564dd5c5e1	SyntaxError: Unexpected token ''', ...""surname":'Jane',
  "... is not valid JSON
 20250210GMT+5	22:51:38	f2063003-ba3f-430d-a457-7dbc839d71d0	SyntaxError: Expected double-quoted property name in JSON at position 236
+20250220GMT+5	12:13:15	dfa19468-d192-4074-8da1-3da3b0069b4a	Error: Not allowed by CORS
+20250220GMT+5	12:13:15	f5d036bf-a72a-40c0-837f-eb504ee12735	Error: Not allowed by CORS
+20250220GMT+5	12:13:26	fd71f380-75cd-4557-9955-e49e1d416710	Error: Not allowed by CORS
+20250220GMT+5	12:16:04	2792750b-e605-402c-9450-9132bf9dc123	Error: Not allowed by CORS
+20250220GMT+5	12:16:04	c4284deb-9e1c-41a7-84b1-1da6a315587a	Error: Not allowed by CORS
+20250220GMT+5	12:17:25	028320af-16c7-48b9-b190-c2116d20d880	Error: Not allowed by CORS
+20250220GMT+5	12:17:25	c9fb6f4e-06b2-4f3c-96ed-d7eaee56ac8f	Error: Not allowed by CORS
+20250220GMT+5	12:18:17	84564e57-eb43-4b03-9ea1-88417f540817	Error: Not allowed by CORS
+20250220GMT+5	12:18:17	1e16f0b5-ede5-483d-b4ac-adca39745fd5	Error: Not allowed by CORS
+20250220GMT+5	12:23:01	97f70f22-79e0-4db0-8ed0-40d997b82292	Error: Not allowed by CORS
+20250220GMT+5	12:25:08	01af45b3-6421-4f34-8b32-ea85b8d7509e	Error: Not allowed by CORS
+20250220GMT+5	12:25:27	18087221-38d3-4cec-adc5-359320856a55	Error: Not allowed by CORS

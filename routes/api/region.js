@@ -13,10 +13,8 @@ router.route('/')
 
  router.route('/:id')
      .get(regionController.getRegion);
-
-
-     router.route('/RegionTypeID/:RegionTypeID?/ParentRegion/:ParentRegion?')
+     router.route('/RegionTypeID/:RegionTypeID/ParentRegion/:ParentRegionId')
      .get(regionController.getRegionWithType);
-
-
+    //  router.route('/RegionTypeID/:RegionTypeID?/ParentRegion/:ParentRegion?')
+    //  .get(regionController.getRegionWithType);
 module.exports = router;

@@ -3,55 +3,91 @@ const Region = require('../model/Region');
 const RegionalContacts = require('../model/RegionalContacts');
 const mongoose = require('mongoose');
 
-const getAllRegions = async (req, res) => 
-    {
-        const region = await Region.find();
-        if (!region) return res.status(204).json({ 'message': 'No region found.' });
-        res.json(region);
+const getAllRegions = async (req, res) => {
+    try {
+        // Fetch all regions and populate ParentRegionId with RegionName
+        const regions = await Region.find({})
+            .populate({
+                path: 'ParentRegionId',
+                select: 'RegionName' // Only include the RegionName field
+            })
+            .exec();
+
+        if (!regions.length) {
+            return res.status(404).json({ message: 'No regions found' });
+        }
+
+        // Transform the data to include ParentRegionName separately
+        const formattedRegions = regions.map(region => ({
+            _id: region._id,
+            RegionCode: region.RegionCode,
+            RegionName: region.RegionName,
+            DisplayName: region.DisplayName,
+            ParentRegionId: region.ParentRegionId ? region.ParentRegionId._id : null, // Keep only the ID
+            ParentRegion: region.ParentRegionId ? region.ParentRegionId.RegionName : null, // Include name separately
+            RegionTypeID: region.RegionTypeID
+        }));
+
+        res.status(200).json(formattedRegions);
+    } catch (error) {
+        console.error("Error fetching regions:", error);
+        res.status(500).json({ error: 'An error occurred while fetching regions' });
     }
+};
 
-const createNewRegion =  async (req, res) => {
-        if (!req?.body?.region.RegionCode || !req?.body?.region.RegionName ) {
-            return res.status(400).json({ 'message': 'Region Code/Name are required' });
+
+
+const createNewRegion = async (req, res) => {
+    try {
+        // Validate required fields
+        const { region, contactsprofile } = req.body;
+
+        if (!region?.RegionCode || !region?.RegionName) {
+            return res.status(400).json({ message: 'Region Code and Region Name are required' });
         }
 
-        try 
-        {
-            // Step 1: Create Profile
-            const region = await Region.create([req.body.region]);
-            // const region = await Region.create([req.body.region], { session });
-            const regionid = region[0]._id;
+        // Ensure ParentRegionId is set properly (if provided)
+        const newRegion = {
+            RegionCode: region.RegionCode,
+            RegionName: region.RegionName,
+            DisplayName: region.DisplayName || region.RegionName, // Default to RegionName if DisplayName is not provided
+            ParentRegionId: region.ParentRegionId || null, // Null if not provided
+            RegionTypeID: region.RegionTypeID, // Required field
+            isDeleted: region.isDeleted || false,
+            isActive: region.isActive !== undefined ? region.isActive : true,
+        };
 
-            const cprofile = req.body.contactsprofile;
+        // Step 1: Create Region
+        const createdRegion = await Region.create(newRegion);
+        const regionid = createdRegion._id;
 
-            // Step 2: Optional Contact Profile Creation
-            let contactid = null; // Initialize contactid as null in case no contacts are provided
+        let contactid = null;
 
-            if (cprofile && cprofile.length > 0) {
-                // Proceed with contact creation if contacts profile exists
-                const contactsprofile = cprofile.map(contact => ({ ...contact }));
-                // const contacts = await Contact.create(contactsprofile, { session });
-                const contacts = await Contact.create(contactsprofile,);
-                contactid = contacts[0]._id;
+        // Step 2: Optional Contact Profile Creation
+        if (Array.isArray(contactsprofile) && contactsprofile.length > 0) {
+            const contacts = await Contact.create(contactsprofile);
+            contactid = contacts[0]._id;
 
-                // Create RegionalContacts only if contacts are provided
-                await RegionalContacts.create({
-                    ContactID: contactid,
-                    RegionID: regionid
-                });
-            // }, { session });
-            }
-                    
-            
-            // Send response, including contactid only if it exists
-            res.status(201).json({ regionid, contactid });        
-
+            // Create RegionalContacts only if contacts are provided
+            await RegionalContacts.create({
+                ContactID: contactid,
+                RegionID: regionid
+            });
         }
-         catch (err) {
-             res.status(500).send({ error: 'Region registration failed', details: err });
-            console.error(err);
-        }
+
+        // Send response
+        res.status(201).json({
+            regionid,
+            contactid: contactid || null,
+            message: "Region created successfully"
+        });
+
+    } catch (err) {
+        console.error("Error creating region:", err);
+        res.status(500).json({ error: 'Region registration failed', details: err.message });
     }
+};
+
     
 const updateRegion = async (req, res) => {
         if (!req?.body?.id) {
@@ -87,52 +123,122 @@ const updateRegion = async (req, res) => {
         res.json(result);
     } 
     
-    const getRegion =  async (req, res) => {
-        if (!req?.params?.id) return res.status(400).json({ 'message': 'RegionID required.'});
+    const getRegion = async (req, res) => {
+        try {
+            // Fetch all regions and populate ParentRegionId with RegionName
+            const regions = await Region.find()
+                .populate('ParentRegionId', 'RegionName') // Populate only the RegionName
+                .exec();
     
-        const region = await Region.findOne({ _id: req.params.id}).exec();
-        if (!Region) {
-                    return res.status(240).json({ "message": ` No Region matches ID ${req.params.id}. ` });
+            if (!regions.length) {
+                return res.status(404).json({ message: 'No regions found' });
+            }
+    
+            // Send response
+            res.json(regions);
+    
+        } catch (error) {
+            console.error("Error fetching regions:", error);
+            res.status(500).json({ message: 'Server error' });
         }
-        res.json(region);
-    }
+    };
+    
+    
+    
+    
  
     //load region against regiontype or parentregion parameters
-    const getRegionWithType =  async (req, res) => {
-        try {
-         // Extract parameters from req.params
-         const { RegionTypeID, ParentRegion } = req.params;
+//     const getRegionWithType =  async (req, res) => {
+//         try {
+//          // Extract parameters from req.params
+//          const { RegionTypeID, ParentRegion } = req.params;
 
-         // Build the query object dynamically
-         let query = {};
+//          // Build the query object dynamically
+//          let query = {};
 
-         // Add RegionTypeID to the query if provided
-        if (RegionTypeID) {
-            query.RegionTypeID = RegionTypeID;
+//          // Add RegionTypeID to the query if provided
+//         if (RegionTypeID) {
+//             query.RegionTypeID = RegionTypeID;
+//         }
+
+//         // Add ParentRegion to the query if provided
+//         if (ParentRegion) {
+//             query.ParentRegion = ParentRegion;
+//         }
+
+//         console.log("test query" + query);
+// //        return res.status(240).json({ "message": ` query:  query ` });
+//         // Execute the query with the built query object
+//         const regions = await Region.find(query).exec();
+
+//         // If no regions are found, return a 404
+//         if (regions.length === 0) {
+//             return res.status(404).send('No regions found');
+//         }
+
+//         // Send back the matching regions
+//         res.json(regions);
+
+//         } catch (error) {
+//             res.status(500).send('Server error');
+//         }      
+//     }
+
+const getRegionWithType = async (req, res) => {
+    try {
+        // Extract RegionTypeID and ParentRegionId from the URL params
+        const { RegionTypeID, ParentRegionId } = req.params;
+
+        // Ensure both RegionTypeID and ParentRegionId are provided
+        if (!RegionTypeID || !ParentRegionId) {
+            return res.status(400).json({ message: "RegionTypeID and ParentRegionId are required" });
         }
 
-        // Add ParentRegion to the query if provided
-        if (ParentRegion) {
-            query.ParentRegion = ParentRegion;
+        // Build query object dynamically
+        let query = { 
+            RegionTypeID: RegionTypeID, 
+            ParentRegionId: ParentRegionId 
+        };
+
+        console.log("Query:", query);
+
+        // Fetch only filtered regions
+        const regions = await Region.find(query)
+            .populate({
+                path: 'ParentRegionId',
+                select: 'RegionName DisplayName' // Fetch RegionName & DisplayName
+            })
+            .populate({
+                path: 'RegionTypeID',
+                select: 'TypeName' // Fetch TypeName from RegionType model
+            })
+            .exec();
+
+        // If no regions are found, return 404
+        if (!regions.length) {
+            return res.status(404).json({ message: 'No regions found' });
         }
 
-        console.log("test query" + query);
-//        return res.status(240).json({ "message": ` query:  query ` });
-        // Execute the query with the built query object
-        const regions = await Region.find(query).exec();
+        // Format response
+        const formattedRegions = regions.map(region => ({
+            _id: region._id,
+            RegionCode: region.RegionCode,
+            RegionName: region.RegionName,
+            DisplayName: region.DisplayName,
+            ParentRegionId: region.ParentRegionId ? region.ParentRegionId._id : null,
+            ParentRegionName: region.ParentRegionId ? region.ParentRegionId.RegionName : null,
+            ParentRegionDisplayName: region.ParentRegionId ? region.ParentRegionId.DisplayName : null,
+            RegionTypeID: region.RegionTypeID ? region.RegionTypeID._id : null,
+            RegionTypeName: region.RegionTypeID ? region.RegionTypeID.TypeName : null
+        }));
 
-        // If no regions are found, return a 404
-        if (regions.length === 0) {
-            return res.status(404).send('No regions found');
-        }
-
-        // Send back the matching regions
-        res.json(regions);
-
-        } catch (error) {
-            res.status(500).send('Server error');
-        }      
+        res.status(200).json(formattedRegions);
+    } catch (error) {
+        console.error("Error fetching regions:", error);
+        res.status(500).json({ message: 'Server error' });
     }
+};
+
 
     
     
