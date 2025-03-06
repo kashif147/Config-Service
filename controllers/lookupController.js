@@ -56,7 +56,7 @@ const createNewLookup =  async (req, res) => {
         const r = await Lookup.create({
           code: req.body.code,
           lookupname: req.body.lookupname,
-          displayname: req.body.displayname,
+          displayname: req.body.DisplayName,
           Parentlookup: req.body.Parentlookup,
           lookuptypeId: req.body.lookuptypeId,
           isdeleted: req.body.isdeleted || false, // Defaults to false if not provided
