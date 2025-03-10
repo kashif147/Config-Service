@@ -12,7 +12,7 @@ const lookupSchema = new mongoose.Schema({
         required: true,
         maxlength: 100 // Lookname length constraint
     },
-    displayname: {
+    DisplayName: {
         type: String,
         maxlength: 100 // Displayname length constraint
     },
