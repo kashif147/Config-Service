@@ -44,7 +44,7 @@ const getLookup =  async (req, res) => {
 
 const createNewLookup =  async (req, res) => {
     try {
-        const { code, lookupname, displayname, Parentlookup, lookuptypeId, isdeleted, isactive, userid } = req.body;
+        const { code, lookupname, DisplayName, Parentlookup, lookuptypeId, isdeleted, isactive, userid } = req.body;
     
         // Validate required fields
         if (!code || !lookupname || !userid) {
@@ -56,7 +56,7 @@ const createNewLookup =  async (req, res) => {
         const r = await Lookup.create({
           code: req.body.code,
           lookupname: req.body.lookupname,
-          displayname: req.body.DisplayName,
+          DisplayName: req.body.DisplayName,
           Parentlookup: req.body.Parentlookup,
           lookuptypeId: req.body.lookuptypeId,
           isdeleted: req.body.isdeleted || false, // Defaults to false if not provided
@@ -83,7 +83,7 @@ const createNewLookup =  async (req, res) => {
 
 const updateLookup = async (req, res) => {
     try {
-        const { id, code, lookupname, displayname, Parentlookup, lookuptypeId, isdeleted, isactive, userid } = req.body;
+        const { id, code, lookupname, DisplayName, Parentlookup, lookuptypeId, isdeleted, isactive, userid } = req.body;
 
       
         // Find the LookupType document by ID
@@ -95,7 +95,7 @@ const updateLookup = async (req, res) => {
         // Update fields individually only if they are provided in the request
         if (code) lookups.code = code;
         if (lookupname) lookups.lookupname = lookupname;
-        if (displayname) lookups.displayname = displayname;
+        if (DisplayName) lookups.DisplayName = DisplayName;
         if (Parentlookup) lookups.Parentlookup = Parentlookup;
         if (lookuptypeId) lookups.lookuptypeId = lookuptypeId;
         if (typeof isdeleted !== 'undefined') lookups.isdeleted = isdeleted;

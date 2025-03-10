@@ -27,7 +27,7 @@ const getLookupType =  async (req, res) => {
 
 const createNewLookupType =  async (req, res) => {
     try {
-        const { code, lookuptype, displayname, isdeleted, isactive, userid } = req.body;
+        const { code, lookuptype, DisplayName, isdeleted, isactive, userid } = req.body;
     
         // Validate required fields
         if (!code || !lookuptype || !userid) {
@@ -38,7 +38,7 @@ const createNewLookupType =  async (req, res) => {
         const lookupType = await LookupType.create({
           code: req.body.code,
           lookuptype: req.body.lookuptype,
-          displayname: req.body.displayName,
+          DisplayName: req.body.DisplayName,
           isdeleted: req.body.isdeleted || false, // Defaults to false if not provided
           isactive: req.body.isactive || true, // Defaults to true if not provided
           userid: req.body.userid
