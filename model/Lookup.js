@@ -16,7 +16,7 @@ const lookupSchema = new mongoose.Schema({
         type: String,
         maxlength: 100 // Displayname length constraint
     },
-    Parentlookup: {
+    Parentlookupid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Lookup', // Self-reference to the Look collection
         default: null
