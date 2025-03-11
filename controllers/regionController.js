@@ -38,6 +38,7 @@ const getAllRegions = async (req, res) => {
 
 
 const createNewRegion = async (req, res) => {
+    //testing comit
     try {
         // Validate required fields
         const { region, contactsprofile } = req.body;
