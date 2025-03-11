@@ -26,8 +26,9 @@ const getAllLookup = async (req, res) => {
         _id: lookups?.lookuptypeId ? lookups?.lookuptypeId?._id : null,
         code: lookups?.lookuptypeId ? lookups?.lookuptypeId?.code : null,
         lookuptype: lookups?.lookuptypeId ? lookups?.lookuptypeId?.lookuptype : null,
-
-      }
+      },
+      isactive:lookups?.isactive,
+      isdeleted:lookups?.isdeleted
     }));
     res.status(200).json(formattedRegions);
   } catch (error) {
@@ -67,8 +68,9 @@ const getLookup = async (req, res) => {
           _id: lookups?.lookuptypeId ? lookups?.lookuptypeId?._id : null,
           code: lookups?.lookuptypeId ? lookups?.lookuptypeId?.code : null,
           lookuptype: lookups?.lookuptypeId ? lookups?.lookuptypeId?.lookuptype : null,
-  
-        }
+        },
+        isactive:lookups?.isactive,
+      isdeleted:lookups?.isdeleted
       }));
       res.status(200).json(formattedRegions);
 
