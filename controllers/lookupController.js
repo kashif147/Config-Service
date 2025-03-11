@@ -60,7 +60,7 @@ const createNewLookup =  async (req, res) => {
           Parentlookup: req.body.Parentlookup,
           lookuptypeId: req.body.lookuptypeId,
           isdeleted: req.body.isdeleted || false, // Defaults to false if not provided
-          isactive: req.body.isactive || true, // Defaults to true if not provided
+          isactive: req.body.isactive , // Defaults to true if not provided
           userid: req.body.userid
         });
     
