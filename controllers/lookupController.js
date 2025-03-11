@@ -27,8 +27,8 @@ const getAllLookup = async (req, res) => {
         code: lookups?.lookuptypeId ? lookups?.lookuptypeId?.code : null,
         lookuptype: lookups?.lookuptypeId ? lookups?.lookuptypeId?.lookuptype : null,
       },
-      isactive:lookups?.isactive,
-      isdeleted:lookups?.isdeleted
+      isactive: lookups?.isactive,
+      isdeleted: lookups?.isdeleted
     }));
     res.status(200).json(formattedRegions);
   } catch (error) {
@@ -48,7 +48,7 @@ const getLookup = async (req, res) => {
     // res.json(lookup);
 
     // Fetch all Lookup documents and populate lookuptypeId with fields from LookupType
-      const lookups = await Lookup.find({})
+    const lookups = await Lookup.find({})
       .populate({
         path: 'lookuptypeId',
         select: 'code lookuptype displayname' // Fields to include from LookupType
@@ -57,23 +57,22 @@ const getLookup = async (req, res) => {
         path: 'Parentlookupid',
         select: 'lookupname ' // Fields to include from LookupType
       });
-      const formattedRegions = lookups.map(lookups => ({
-        _id: lookups?._id,
-        code: lookups?.code,
-        lookupname: lookups?.lookupname,
-        DisplayName: lookups?.DisplayName,
-        Parentlookupid: lookups?.Parentlookupid ? lookups?.Parentlookupid._id : null, // Keep only the ID
-        Parentlookup: lookups?.Parentlookupid ? lookups?.Parentlookupid.lookupname : null, // Include name separately
-        lookuptypeId: {
-          _id: lookups?.lookuptypeId ? lookups?.lookuptypeId?._id : null,
-          code: lookups?.lookuptypeId ? lookups?.lookuptypeId?.code : null,
-          lookuptype: lookups?.lookuptypeId ? lookups?.lookuptypeId?.lookuptype : null,
-        },
-        isactive:lookups?.isactive,
-      isdeleted:lookups?.isdeleted
-      }));
-      res.status(200).json(formattedRegions);
-
+    const formattedRegions = lookups.map(lookups => ({
+      _id: lookups?._id,
+      code: lookups?.code,
+      lookupname: lookups?.lookupname,
+      DisplayName: lookups?.DisplayName,
+      Parentlookupid: lookups?.Parentlookupid ? lookups?.Parentlookupid._id : null, // Keep only the ID
+      Parentlookup: lookups?.Parentlookupid ? lookups?.Parentlookupid.lookupname : null, // Include name separately
+      lookuptypeId: {
+        _id: lookups?.lookuptypeId ? lookups?.lookuptypeId?._id : null,
+        code: lookups?.lookuptypeId ? lookups?.lookuptypeId?.code : null,
+        lookuptype: lookups?.lookuptypeId ? lookups?.lookuptypeId?.lookuptype : null,
+      },
+      isactive: lookups?.isactive,
+      isdeleted: lookups?.isdeleted
+    }));
+    res.status(200).json(formattedRegions);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
