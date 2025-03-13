@@ -93,7 +93,7 @@ const createNewLookup = async (req, res) => {
       code: req.body.code,
       lookupname: req.body.lookupname,
       DisplayName: req.body.DisplayName,
-      Parentlookupid: req.body.Parentlookup,
+      Parentlookupid: req.body.Parentlookupid,
       lookuptypeId: req.body.lookuptypeId,
       isdeleted: req.body.isdeleted || false, // Defaults to false if not provided
       isactive: req.body.isactive, // Defaults to true if not provided
@@ -119,7 +119,7 @@ const createNewLookup = async (req, res) => {
 
 const updateLookup = async (req, res) => {
   try {
-    const { id, code, lookupname, DisplayName, Parentlookup, lookuptypeId, isdeleted, isactive, userid } = req.body;
+    const { id, code, lookupname, DisplayName, Parentlookupid, lookuptypeId, isdeleted, isactive, userid } = req.body;
 
 
     // Find the LookupType document by ID
@@ -132,7 +132,7 @@ const updateLookup = async (req, res) => {
     if (code) lookups.code = code;
     if (lookupname) lookups.lookupname = lookupname;
     if (DisplayName) lookups.DisplayName = DisplayName;
-    if (Parentlookup) lookups.Parentlookup = Parentlookup;
+    if (Parentlookupid) lookups.Parentlookupid = Parentlookupid;
     if (lookuptypeId) lookups.lookuptypeId = lookuptypeId;
     if (typeof isdeleted !== 'undefined') lookups.isdeleted = isdeleted;
     if (typeof isactive !== 'undefined') lookups.isactive = isactive;
