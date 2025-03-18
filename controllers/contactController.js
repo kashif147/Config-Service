@@ -14,10 +14,10 @@ const createNewContact =  async (req, res) => {
         const { Surname,Forename, ContactPhone, ContactEmail, ContactTypeID, isDeleted, ContactAddress } = req.body;
 
         // Check for required fields
-        if (!ContactName || !ContactPhone || !ContactEmail) {
+        if (!Surname || !Forename || !ContactPhone || !ContactEmail) {
             return res.status(400).json({ message: 'Surname,Forename,  ContactPhone, and ContactEmail are required' });
         }
-
+        
        // console.log("Request body:", req.body); // Add this line to log the request body for debugging
         try 
         {
