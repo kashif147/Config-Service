@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 // Contacts Schema (Referenced to contactType)
 const contactSchema = new mongoose.Schema ({
-    ContactName: { type: String, required: true },
+    Surname: { type: String, required: true },
+    Forename: { type: String, required: true },
     ContactPhone: { type: String, required: true },
     ContactEmail: { type: String, required: true },
     ContactAddress: {

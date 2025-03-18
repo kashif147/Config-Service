@@ -11,20 +11,18 @@ const createNewContact =  async (req, res) => {
         //  if (!req?.body?.ContactName || !req?.body?.ContactPhone || !req?.body?.ContactEmail ) {
         //      return res.status(400).json({ 'message': 'ContactName/ContactPhone/ContactEmail are required' });
         //  }
-        const { ContactName, ContactPhone, ContactEmail, ContactTypeID, isDeleted, ContactAddress } = req.body;
+        const { Surname,Forename, ContactPhone, ContactEmail, ContactTypeID, isDeleted, ContactAddress } = req.body;
 
         // Check for required fields
         if (!ContactName || !ContactPhone || !ContactEmail) {
-            return res.status(400).json({ message: 'ContactName, ContactPhone, and ContactEmail are required' });
+            return res.status(400).json({ message: 'Surname,Forename,  ContactPhone, and ContactEmail are required' });
         }
 
        // console.log("Request body:", req.body); // Add this line to log the request body for debugging
-
-        
         try 
         {
             const result = await Contact.create({
-                ContactName,
+                Surname,Forename, 
                 ContactPhone,
                 ContactEmail,
                 ContactAddress:  {
@@ -34,10 +32,9 @@ const createNewContact =  async (req, res) => {
                     CityCountyOrPostCode : ContactAddress?.CityCountyOrPostCode || '',
                     Eircode : ContactAddress?.Eircode || ''
                 },
-               
                 ContactTypeID : ContactTypeID || null, // Optional, use null if not provided
                 isDeleted: isDeleted !== undefined ? isDeleted : false // Default to false if not provided
-            
+               
             });
             res.status(201).json(result);
         }
@@ -51,7 +48,7 @@ const createNewContact =  async (req, res) => {
     
     const updateContact = async (req, res) => {
         const { id } = req.body;  // Get the contact ID from the request body
-        const { ContactName, ContactPhone, ContactEmail, ContactAddress, ContactTypeID, isDeleted } = req.body;
+        const { Surname,Forename,  ContactPhone, ContactEmail, ContactAddress, ContactTypeID, isDeleted } = req.body;
     
         // Logging the request body for debugging
        // console.log("Request body:", req.body);
@@ -65,7 +62,7 @@ const createNewContact =  async (req, res) => {
             }
     
             // Update the fields if they are provided, otherwise keep existing values
-            if (ContactName) updatedContact.ContactName = ContactName;
+            if (Surname) updatedContact.Surname = Surname;
             if (ContactPhone) updatedContact.ContactPhone = ContactPhone;
             if (ContactEmail) updatedContact.ContactEmail = ContactEmail;
     
