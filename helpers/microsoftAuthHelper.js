@@ -7,11 +7,6 @@ const POLICY = "B2C_1_projectshell";
 const CLIENT_ID = "e9460e2d-29d1-4711-be7e-e1e92d1370ef";
 const REDIRECT_URI = "http://localhost:3000";
 
-// const TENANT_NAME = process.env.MS_TENANT_NAME;
-// const POLICY = process.env.MS_POLICY;
-// const CLIENT_ID = process.env.MS_CLIENT_ID;
-// const REDIRECT_URI = process.env.MS_REDIRECT_URI;
-
 const TOKEN_ENDPOINT = `https://${TENANT_NAME}.b2clogin.com/${TENANT_NAME}.onmicrosoft.com/${POLICY}/oauth2/v2.0/token`;
 
 class MicrosoftAuthHelper {
@@ -19,6 +14,7 @@ class MicrosoftAuthHelper {
     console.log("Starting token exchange with Microsoft");
     console.log("Code received:", code ? "Present" : "Missing");
 
+    ////gg
     const data = new URLSearchParams({
       grant_type: "authorization_code",
       client_id: CLIENT_ID,
