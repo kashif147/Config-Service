@@ -23,9 +23,22 @@ const handleLogin = async (req, res) => {
     }
 
     // ✅ Generate JWT token
+    // const roles = Object.values(foundUser.roles);
+    // const accessToken = jwt.sign(
+    //   { UserInfo: { username: foundUser.username, roles: roles } },
+    //   process.env.ACCESS_TOKEN_SECRET,
+    //   { expiresIn: "900s" }
+    // );
     const roles = Object.values(foundUser.roles);
+
     const accessToken = jwt.sign(
-      { UserInfo: { username: foundUser.username, roles: roles } },
+      {
+        id: foundUser._id, // ✅ add this line
+        UserInfo: {
+          username: foundUser.username,
+          roles: roles,
+        },
+      },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "900s" }
     );
@@ -44,11 +57,7 @@ const handleLogin = async (req, res) => {
 
   // ✅ Generate JWT tokens
   const roles = Object.values(foundUser.roles);
-  const accessToken = jwt.sign(
-    { UserInfo: { username: foundUser.username, roles: roles } },
-    process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "900s" }
-  );
+  const accessToken = jwt.sign({ UserInfo: { username: foundUser.username, roles: roles } }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "900s" });
   const refreshToken = jwt.sign({ username: foundUser.username }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "1d",
   });

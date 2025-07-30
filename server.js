@@ -16,6 +16,9 @@ const { connectRabbitMQ } = require("message-bus");
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 
+// Initialize listeners
+require("./rabbitMQ/listeners/applicationListener");
+
 //const { swaggerUi, swaggerDocs } = require('./swagger');
 
 // Serve Swagger docs
@@ -67,6 +70,9 @@ app.use("/gardaLifeClaims", require("./routes/api/GardaLifeClaimRoutes"));
 app.use("/partnerLifeClaims", require("./routes/api/PartnerLifeClaimRoute"));
 app.use("/criticalIllness", require("./routes/api/CriticalIllnessClimRoutes"));
 app.use("/transferRequest", require("./routes/api/TransferRequestRoutes"));
+
+// Application approval routes
+// app.use("/applications", require("./routes/api/applicationApproval"));
 
 //app.all is for routin and apply for all http methods at once
 //app.use is for middleware and not support rjax
