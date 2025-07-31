@@ -6,3 +6,6 @@
 profile.publishsettings
 .DS_Store
 Dockerfile
+node_modules/
+logs/
+*.log
