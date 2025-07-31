@@ -4,3 +4,5 @@
 /logs/errLog.txt
 /logs/reqLog.txt
 profile.publishsettings
+.DS_Store
+Dockerfile
