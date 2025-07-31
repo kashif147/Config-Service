@@ -89,25 +89,10 @@ app.all("*", (req, res) => {
 
 app.use(errorHandler);
 
-// // Connect to RabbitMQ and start the server
-// (async () => {
-//   try {
-//     await connectRabbitMQ({
-//       amqpUrl: process.env.RABBITMQ_URL || "amqp://localhost",
-//       retryAttempts: 10,
-//       retryDelay: 3000,
-//     });
-
-//     console.log("🎉 RabbitMQ is ready in Config Service");
-
-//     mongoose.connection.once("open", () => {
-//       console.log("Connected to MongoDB");
-//       app.listen(PORT, () => {
-//         console.log(`Server is running on port ${PORT}`);
-//       });
-//     });
-//   } catch (error) {
-//     console.error("Failed to connect to RabbitMQ:", error);
-//     process.exit(1);
-//   }
-// })();
+// Start the server
+mongoose.connection.once("open", () => {
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+});

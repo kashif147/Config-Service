@@ -33,10 +33,15 @@ const handleLogin = async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-        id: foundUser._id, // ✅ add this line
+        id: foundUser._id,
         UserInfo: {
           username: foundUser.username,
           roles: roles,
+        },
+        user: {
+          ...foundUser.toObject(),
+          id: foundUser._id,
+          service: "config-service",
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
@@ -46,6 +51,7 @@ const handleLogin = async (req, res) => {
     return res.json({ accessToken });
   }
 
+  console.log("Found user full:", foundUser);
   // ✅ Normal login flow (when isMicrosoft is false)
   if (!pwd) return res.status(400).json({ message: "Password is required." });
 
@@ -57,7 +63,23 @@ const handleLogin = async (req, res) => {
 
   // ✅ Generate JWT tokens
   const roles = Object.values(foundUser.roles);
-  const accessToken = jwt.sign({ UserInfo: { username: foundUser.username, roles: roles } }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "900s" });
+  const accessToken = jwt.sign(
+    {
+      id: foundUser._id,
+      UserInfo: {
+        username: foundUser.username,
+        roles: roles,
+      },
+      // Include all user data with both _id and id
+      user: {
+        ...foundUser.toObject(),
+        id: foundUser._id,
+        service: "config-service",
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "900s" }
+  );
   const refreshToken = jwt.sign({ username: foundUser.username }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "1d",
   });
