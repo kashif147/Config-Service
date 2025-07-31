@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 dotenv.config();
 
 // Initialize listeners
-require("./rabbitMQ/listeners/applicationListener");
+// require("./rabbitMQ/listeners/applicationListener");
 
 //const { swaggerUi, swaggerDocs } = require('./swagger');
 
