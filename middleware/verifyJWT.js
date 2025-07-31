@@ -8,7 +8,9 @@ const verifyJWT = (req, res, next) => {
     if (err) {
       return res.sendStatus(403); //invalid token
     }
-    req.user = decoded.username;
+
+    // Set req.user to the complete user object from token
+    req.user = decoded.user; // This contains all user fields including id, _id, username, roles, etc.
     req.roles = decoded.UserInfo.roles;
     next();
   });
