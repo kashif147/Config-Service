@@ -26,8 +26,7 @@ jobs:
       - name: Zip project contents correctly
         run: |
           mkdir deploy
-          shopt -s dotglob extglob
-          cp -r !(deploy|node_modules|.git|node-app.zip|.github) deploy/
+          rsync -av --exclude=node_modules --exclude=.git --exclude=.github --exclude=deploy --exclude=node-app.zip ./ ./deploy
           cd deploy
           zip -r ../node-app.zip .
 
