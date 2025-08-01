@@ -23,9 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Zip project folder
+      - name: Zip project contents correctly
         run: |
-          zip -r node-app.zip * .[^.]* -x "node_modules/*" ".git/*"
+          mkdir deploy
+          shopt -s dotglob extglob
+          cp -r !(deploy|node_modules|.git|node-app.zip|.github) deploy/
+          cd deploy
+          zip -r ../node-app.zip .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
