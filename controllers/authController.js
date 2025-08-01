@@ -1,5 +1,4 @@
 const User = require("../model/User");
-// const bcrypt = require("bcrypt");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -8,11 +7,9 @@ const handleLogin = async (req, res) => {
   if (!user) return res.status(400).json({ message: "Username is required." });
 
   let foundUser = await User.findOne({ username: user }).exec();
-  console.log("Found user full:", foundUser);
 
   if (isMicrosoft) {
     if (!foundUser) {
-      // ✅ Create new Microsoft user if not found
       foundUser = new User({ username: user, roles: { User: 2001 }, isMicrosoft: true });
 
       try {
@@ -41,7 +38,7 @@ const handleLogin = async (req, res) => {
         user: {
           ...foundUser.toObject(),
           id: foundUser._id,
-          service: "config-service",
+          userType: "CRM",
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
@@ -74,7 +71,7 @@ const handleLogin = async (req, res) => {
       user: {
         ...foundUser.toObject(),
         id: foundUser._id,
-        service: "config-service",
+        userType: "CRM",
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
