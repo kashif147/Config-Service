@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const handleLogin = async (req, res) => {
+  console.log("req.body", req.user);
+
   const { user, pwd, isMicrosoft } = req.body;
   if (!user) return res.status(400).json({ message: "Username is required." });
 
@@ -26,18 +28,14 @@ const handleLogin = async (req, res) => {
     //   process.env.ACCESS_TOKEN_SECRET,
     //   { expiresIn: "900s" }
     // );
-    const roles = Object.values(foundUser.roles);
+    // const roles = Object.values(foundUser.roles);
 
     const accessToken = jwt.sign(
       {
-        id: foundUser._id,
-        UserInfo: {
-          username: foundUser.username,
-          roles: roles,
-        },
         user: {
-          ...foundUser.toObject(),
           id: foundUser._id,
+          username: foundUser.username,
+          roles: Object.values(foundUser.roles),
           userType: "CRM",
         },
       },
@@ -45,7 +43,7 @@ const handleLogin = async (req, res) => {
       { expiresIn: "900s" }
     );
 
-    return res.json({ accessToken });
+    return res.json({ accessToken: `Bearer ${accessToken}` });
   }
 
   console.log("Found user full:", foundUser);
@@ -59,24 +57,19 @@ const handleLogin = async (req, res) => {
   if (!match) return res.sendStatus(401);
 
   // ✅ Generate JWT tokens
-  const roles = Object.values(foundUser.roles);
   const accessToken = jwt.sign(
     {
-      id: foundUser._id,
-      UserInfo: {
-        username: foundUser.username,
-        roles: roles,
-      },
-      // Include all user data with both _id and id
       user: {
-        ...foundUser.toObject(),
         id: foundUser._id,
+        username: foundUser.username,
+        roles: Object.values(foundUser.roles),
         userType: "CRM",
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "900s" }
   );
+
   const refreshToken = jwt.sign({ username: foundUser.username }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "1d",
   });
@@ -86,7 +79,7 @@ const handleLogin = async (req, res) => {
   await foundUser.save();
 
   res.cookie("jwt", refreshToken, { httpOnly: true, sameSite: "None", maxAge: 24 * 60 * 60 * 1000 });
-  res.json({ accessToken });
+  res.json({ accessToken: `Bearer ${accessToken}` });
 };
 
 module.exports = { handleLogin };
