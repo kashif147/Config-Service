@@ -12,7 +12,7 @@ const cookieParser = require("cookie-parser");
 const credentials = require("./middleware/credentials");
 const mongoose = require("mongoose");
 const connectDB = require("./config/dbConn");
-const { connectRabbitMQ } = require("message-bus");
+// const { connectRabbitMQ } = require("message-bus");
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 
