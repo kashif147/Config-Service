@@ -31,3 +31,5 @@
 20250220GMT+5	12:23:01	97f70f22-79e0-4db0-8ed0-40d997b82292	Error: Not allowed by CORS
 20250220GMT+5	12:25:08	01af45b3-6421-4f34-8b32-ea85b8d7509e	Error: Not allowed by CORS
 20250220GMT+5	12:25:27	18087221-38d3-4cec-adc5-359320856a55	Error: Not allowed by CORS
+20250805GMT+5	21:59:28	a585b23f-870c-4b80-a87c-af1c42060b92	TypeError: Cannot read properties of undefined (reading 'roles')
+20250805GMT+5	21:59:43	223a0411-b6cf-4d42-90e2-3b5adaeab2e2	TypeError: Cannot read properties of undefined (reading 'roles')

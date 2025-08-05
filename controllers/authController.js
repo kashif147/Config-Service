@@ -9,6 +9,7 @@ const handleLogin = async (req, res) => {
   if (!user) return res.status(400).json({ message: "Username is required." });
 
   let foundUser = await User.findOne({ username: user }).exec();
+  console.log("Found user structure:", JSON.stringify(foundUser, null, 2));
 
   if (isMicrosoft) {
     if (!foundUser) {
@@ -35,7 +36,7 @@ const handleLogin = async (req, res) => {
         user: {
           id: foundUser._id,
           username: foundUser.username,
-          roles: Object.values(foundUser.roles),
+          roles: foundUser.roles ? Object.values(foundUser.roles) : [2001],
           userType: "CRM",
         },
       },
@@ -62,7 +63,7 @@ const handleLogin = async (req, res) => {
       user: {
         id: foundUser._id,
         username: foundUser.username,
-        roles: Object.values(foundUser.roles),
+        roles: foundUser.roles ? Object.values(foundUser.roles) : [2001],
         userType: "CRM",
       },
     },
