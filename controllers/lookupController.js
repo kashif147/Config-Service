@@ -1,5 +1,5 @@
 const Lookup = require("../model/Lookup");
-const { publishEvent } = require("message-bus");
+// const { publishEvent } = require("message-bus");
 
 const getAllLookup = async (req, res) => {
   try {
@@ -97,23 +97,23 @@ const createNewLookup = async (req, res) => {
     });
 
     // Emit event for Profile Service
-    try {
-      await publishEvent("lookup.created", {
-        lookupId: lookup._id,
-        code: lookup.code,
-        lookupname: lookup.lookupname,
-        DisplayName: lookup.DisplayName,
-        Parentlookupid: lookup.Parentlookupid,
-        lookuptypeId: lookup.lookuptypeId,
-        isdeleted: lookup.isdeleted,
-        isactive: lookup.isactive,
-        userid: lookup.userid,
-        timestamp: new Date(),
-      });
-      console.log("✅ [Config] Lookup Created Event published:", lookup._id);
-    } catch (eventError) {
-      console.error("❌ [Config] Error publishing Lookup Created Event:", eventError.message);
-    }
+    // try {
+    //   await publishEvent("lookup.created", {
+    //     lookupId: lookup._id,
+    //     code: lookup.code,
+    //     lookupname: lookup.lookupname,
+    //     DisplayName: lookup.DisplayName,
+    //     Parentlookupid: lookup.Parentlookupid,
+    //     lookuptypeId: lookup.lookuptypeId,
+    //     isdeleted: lookup.isdeleted,
+    //     isactive: lookup.isactive,
+    //     userid: lookup.userid,
+    //     timestamp: new Date(),
+    //   });
+    //   console.log("✅ [Config] Lookup Created Event published:", lookup._id);
+    // } catch (eventError) {
+    //   console.error("❌ [Config] Error publishing Lookup Created Event:", eventError.message);
+    // }
 
     res.status(201).json(lookup);
   } catch (error) {
@@ -159,26 +159,26 @@ const updateLookup = async (req, res) => {
     await lookup.save();
 
     // Emit event for Profile Service
-    try {
-      await publishEvent("lookup.updated", {
-        lookupId: lookup._id,
-        oldValues,
-        newValues: {
-          code: lookup.code,
-          lookupname: lookup.lookupname,
-          DisplayName: lookup.DisplayName,
-          Parentlookupid: lookup.Parentlookupid,
-          lookuptypeId: lookup.lookuptypeId,
-          isdeleted: lookup.isdeleted,
-          isactive: lookup.isactive,
-        },
-        userid: lookup.userid,
-        timestamp: new Date(),
-      });
-      console.log("✅ [Config] Lookup Updated Event published:", lookup._id);
-    } catch (eventError) {
-      console.error("❌ [Config] Error publishing Lookup Updated Event:", eventError.message);
-    }
+    // try {
+    //   await publishEvent("lookup.updated", {
+    //     lookupId: lookup._id,
+    //     oldValues,
+    //     newValues: {
+    //       code: lookup.code,
+    //       lookupname: lookup.lookupname,
+    //       DisplayName: lookup.DisplayName,
+    //       Parentlookupid: lookup.Parentlookupid,
+    //       lookuptypeId: lookup.lookuptypeId,
+    //       isdeleted: lookup.isdeleted,
+    //       isactive: lookup.isactive,
+    //     },
+    //     userid: lookup.userid,
+    //     timestamp: new Date(),
+    //   });
+    //   console.log("✅ [Config] Lookup Updated Event published:", lookup._id);
+    // } catch (eventError) {
+    //   console.error("❌ [Config] Error publishing Lookup Updated Event:", eventError.message);
+    // }
 
     res.json(lookup);
   } catch (error) {
@@ -212,12 +212,12 @@ const deleteLookup = async (req, res) => {
   const result = await lookup.deleteOne({ _id: req.body.id });
 
   // Emit event for Profile Service
-  try {
-    await publishEvent("lookup.deleted", deletedLookup);
-    console.log("✅ [Config] Lookup Deleted Event published:", lookup._id);
-  } catch (eventError) {
-    console.error("❌ [Config] Error publishing Lookup Deleted Event:", eventError.message);
-  }
+  // try {
+  //   await publishEvent("lookup.deleted", deletedLookup);
+  //   console.log("✅ [Config] Lookup Deleted Event published:", lookup._id);
+  // } catch (eventError) {
+  //   console.error("❌ [Config] Error publishing Lookup Deleted Event:", eventError.message);
+  // }
 
   res.json(result);
 };
