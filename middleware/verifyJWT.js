@@ -11,6 +11,7 @@ const verifyJWT = (req, res, next) => {
 
     // Set req.user to the complete user object from token
     req.user = decoded.user; // This contains all user fields including id, _id, username, roles, etc.
+    // req.roles = decoded.UserInfo.roles;
     req.roles = decoded.user.roles; // Use user.roles instead of UserInfo.roles
     next();
   });
