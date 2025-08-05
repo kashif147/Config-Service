@@ -20,3 +20,4 @@ logs/reqLog.txt
 .env.production.local
 .env.development
 .env.test
+//"message-bus": "github:sadeequk/message-bus#main",

@@ -23,7 +23,6 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
-    "message-bus": "github:sadeequk/message-bus#main",
     "mongoose": "^8.6.3",
     "mongoose-uuid-ts": "^1.0.4",
     "uuid": "^10.0.0"
