@@ -16,6 +16,7 @@ const connectDB = require("./config/dbConn");
 const PORT = process.env.PORT || 3000;
 dotenv.config();
 
+//testing
 // Initialize listeners
 // require("./rabbitMQ/listeners/applicationListener");
 
